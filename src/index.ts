@@ -3,6 +3,7 @@ import config from './config';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
+import routes from './routes';
 import errorHandler from './middleware/errorHandler';
 
 import db from './db';
@@ -10,9 +11,10 @@ import db from './db';
 
 const app:Application = express();
 const PORT = config.port || 3000;
+
 const limiter = rateLimit({
 	windowMs: 20 * 60 * 1000, 
-	max: 5, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+	max: 5,
 	standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
 	legacyHeaders: false, // Disable the `X-RateLimit-*` headers
     message:'Too many requests created from this IP, please try again after an hour',
@@ -24,7 +26,7 @@ app.use(helmet()); // for security
 
 app.use(limiter)
 
-console.log('hello world emy');
+app.use('/api',routes);
 
 app.get('/', (req:Request, res: Response)=> {
     res.json({
@@ -32,14 +34,14 @@ app.get('/', (req:Request, res: Response)=> {
     })
 });
 
-db.connect().then((client)=> {
+db.connect().then(client=> {
    return client.query('SELECT NOW()').then((res)=> {
     client.release();
-    console.log(res.rows);
+    console.log('hii',res.rows);
    })
    .catch(error => {
     client.release();
-    console.log(error)
+    console.log('error',error)
    })
 
 })

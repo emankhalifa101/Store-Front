@@ -7,12 +7,12 @@ const pool = new Pool({
     database: config.database,
     password: config.db_password,
     port: parseInt(config.db_port as string , 10),
-    max: 3
+    max: 10
   });
 
   // To listin on error 
   pool.on('error', (error: Error) => {
-    console.error(error.message);
+    console.error('db error',error.message);
   })
 
   export default pool;
