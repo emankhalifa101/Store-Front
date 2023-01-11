@@ -9,7 +9,10 @@ const {
     POSTGRES_PORT,
     POSTGRES_DB,
     POSTGRES_USER,
-    POSTGRES_PASSWORD
+    POSTGRES_PASSWORD,
+    SALTROUNDS,
+    BCRYBT_TEXT_PASSWORD,
+    JWT_SECRET
 } = process.env;
 
 export default {
@@ -18,5 +21,8 @@ export default {
     db_port : POSTGRES_PORT,
     database : POSTGRES_DB,
     db_user : POSTGRES_USER,
-    db_password : POSTGRES_PASSWORD
+    db_password : POSTGRES_PASSWORD,
+    salts: SALTROUNDS,
+    pepper: BCRYBT_TEXT_PASSWORD,
+    tokenSecret: JWT_SECRET
 }

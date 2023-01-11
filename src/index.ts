@@ -34,17 +34,6 @@ app.get('/', (req:Request, res: Response)=> {
     })
 });
 
-db.connect().then(client=> {
-   return client.query('SELECT NOW()').then((res)=> {
-    client.release();
-    console.log('hii',res.rows);
-   })
-   .catch(error => {
-    client.release();
-    console.log('error',error)
-   })
-
-})
 
 app.use(errorHandler);
 // handling for un exist route
