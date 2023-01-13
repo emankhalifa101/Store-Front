@@ -4,7 +4,7 @@ import * as controller from '../../controller/users.controller';
 
 const routes = Router();
 
-routes.get('/',authValidationHandler,controller.getAllUsers);
+routes.get('/',controller.getAllUsers);
 
 routes.get('/:id',authValidationHandler,controller.getUser);
 

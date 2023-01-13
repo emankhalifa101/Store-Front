@@ -37,7 +37,7 @@ class UserModel {
   async selectAllUsers(): Promise<User[]> {
     try {
       const connection = db.connect();
-      const sql = `SELECT id, email, user_name, f_name, l_name, password FROM users`;
+      const sql = `SELECT id, email, user_name, f_name, l_name FROM users`;
       const allUsers = (await connection).query(sql);
       (await connection).release();
       return (await allUsers).rows;
