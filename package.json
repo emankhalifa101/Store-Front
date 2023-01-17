@@ -10,7 +10,8 @@
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint --fix",
     "format": "npx prettier --write src/**/*.ts ",
-    "test": "npx tsc && jasmine",
+    "jasmine": "jasmine-ts  --config=./spec/support/jasmine.json",
+    "test": "export NODE_ENV=test&&db-migrate up --config ./database.json -e test&&tsc && npx run jasmine && db-migrate down",
     "migration:up": "npx db-migrate up"
   },
   "repository": {
