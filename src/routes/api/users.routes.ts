@@ -4,11 +4,11 @@ import * as controller from '../../controller/users.controller';
 
 const routes = Router();
 
-routes.get('/',controller.getAllUsers);
+routes.get('/',authValidationHandler,controller.getAllUsers);
 
 routes.get('/:id',authValidationHandler,controller.getUser);
 
-routes.post('/addUser',controller.createUser);
+routes.post('/addUser',authValidationHandler,controller.createUser);
 
 routes.put('/editUser',authValidationHandler,controller.updateUser);
 

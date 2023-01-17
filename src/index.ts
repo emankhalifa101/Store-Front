@@ -6,8 +6,6 @@ import rateLimit from 'express-rate-limit';
 import routes from './routes';
 import errorHandler from './middleware/errorHandler';
 
-import db from './db';
-
 
 const app:Application = express();
 const PORT = config.port || 3000;

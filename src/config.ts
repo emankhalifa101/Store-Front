@@ -4,7 +4,6 @@ dotenv.config();
 
 const {
     PORT,
-    NODE_ENV ,
     POSTGRES_HOST,
     POSTGRES_PORT,
     POSTGRES_DB,

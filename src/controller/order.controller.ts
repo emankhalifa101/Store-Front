@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from 'express';
-import config from '../config';
 import OrderModel from '../models/order.model';
 
 const orderModel = new OrderModel();
