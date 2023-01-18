@@ -16,6 +16,7 @@ class ProductModel {
       (await connection).release();
       return (await result).rows[0];
     } catch (error) {
+      console.log('err',error);
       throw new Error(`nuable to create this product please try again`);
     }
   }

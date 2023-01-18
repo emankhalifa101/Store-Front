@@ -1,16 +1,16 @@
 import db from '../db';
-import config from '../config';
 import Order from '../interfaces/orders.interface';
 
 class OrderModel {
   async createOrder(o: Order): Promise<Order> {
     try {
-      const connection = await db.connect();
+      const connection = db.connect();
       const sql = `INSERT INTO orders (user_id, status) VALUES ($1,$2) returning *`;
-      const result = connection.query(sql, [o.user_id, o.status]);
-      connection.release();
+      const result = (await connection).query(sql, [o.user_id, o.status]);
+      (await connection).release
       return (await result).rows[0];
     } catch (error) {
+      console.log('err',error);
       throw new Error(`sorry unable to create new order`);
     }
   }

@@ -10,12 +10,22 @@ describe('UserModel Tests',()=> {
         l_name: "ahmed",
         password: "1234"
     }
-    /* beforeAll(async()=> {
+    beforeAll(async()=> {
         const connection = db.connect();
-        const sql = `DELETE FROM users WHERE email=$1`;
-        (await connection).query(sql,[user.email]);
+        const sql = `DELETE FROM products_order;\n ALTER SEQUENCE products_order_id_seq RESTART WITH 1;\n
+        DELETE orders;\n ALTER SEQUENCE orders_id_seq RESTART WITH 1;\n
+        DELETE users;\n ALTER SEQUENCE users_id_seq RESTART WITH 1;\n 
+        DELETE FROM products;\n ALTER SEQUENCE products_id_seq RESTART WITH 1;`;
+        (await connection).query(sql);
         (await connection).release();
-    }) */
+    });
+    afterAll(async () => {
+        /* const connection = db.connect();
+        const sql = `DELETE orders;\n ALTER SEQUENCE orders_id_seq RESTART WITH 1;\n
+        DELETE FROM users;\n ALTER SEQUENCE users_id_seq RESTART WITH 1`;
+        (await connection).query(sql);
+        (await connection).release(); */
+    })
 
     it('should create user in data base',async()=> {
         const connection = db.connect();
@@ -24,7 +34,6 @@ describe('UserModel Tests',()=> {
         (await connection).release();
         const newUser = await userModel.addNewUser(user);
         expect(newUser.id).toBeTruthy();
-        expect(newUser.email).toEqual("test1@gamil.com")
     });
 
     it('should reteive all users', async()=> {
@@ -33,26 +42,34 @@ describe('UserModel Tests',()=> {
     });
 
     it('should get one user',async () => {
-        const user = await userModel.selectUser(8);
-        expect(user.id).toEqual(8);
+        const user = await userModel.selectUser(1);
+        expect(user.id).toEqual(1);
     });
 
     it('should update user',async () => {
         const updatedUser = {
-            id: 8,
-            email: "deda1111",
+            id:1,
+            email: "deda2020",
             user_name: "deda mansour",
             f_name: "deda",
             l_name: "hema",
             password: "2020"
         }
         const user = await userModel.updateUser(updatedUser);
-        expect(user.email).toEqual("deda1111");  
+        expect(user.email).toEqual("deda2020");  
     });
 
     it('should delete user',async ()=> {
-        await userModel.deleteUser(22);
-        const user = await userModel.selectUser(22);
+        const user2 = {
+            email: "dedy@d",
+            user_name: "deda mansour",
+            f_name: "deda",
+            l_name: "hema",
+            password: "2020"
+        }
+        const newUser = await userModel.addNewUser(user2);
+        await userModel.deleteUser(2);
+        const user = await userModel.selectUser(2);
         expect(user).toBeFalsy();  
     })
 

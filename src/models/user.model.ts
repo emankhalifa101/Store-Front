@@ -55,6 +55,7 @@ class UserModel {
       (await connection).release();
       return (await user).rows[0];
     } catch (error) {
+      console.log('err',error)
       throw new Error(`unable to get this user${error}`);
     }
   }
@@ -76,6 +77,7 @@ class UserModel {
       (await connection).release();
       return (await updatedUser).rows[0];
     } catch (error) {
+      console.log('err',error)
       throw new Error(`unable to get this user${error}`);
     }
   }

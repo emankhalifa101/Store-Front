@@ -2,6 +2,7 @@ import OrderModel from "../../models/order.model";
 import UserModel from "../../models/user.model";
 import ProductModel from "../../models/product.model";
 import User from "../../interfaces/user.interface";
+import db from '../../db'
 
 describe('Orders Model Tests ', ()=>{
     const orderModel = new OrderModel();
@@ -10,7 +11,7 @@ describe('Orders Model Tests ', ()=>{
 
     let user = {
         user_name:"test2",
-        email:"test2@gamil.com",
+        email:"test5050@gamil.com",
         f_name: "tets2",
         l_name: "ahmed",
         password: "1234"
@@ -21,25 +22,26 @@ describe('Orders Model Tests ', ()=>{
         "description": "p6666",
         "category": "c5"
     }
-    const newOrder = {
-        "user_id": 9,
+    let newOrder = {
+        "user_id": 1,
         "status":"inprogress"
       }
 
     
     beforeAll(async () => {
         user = await userModel.addNewUser(user);
-        await productModel.createProduct(newProduct);
-        
+        await productModel.createProduct(newProduct); 
     });
     afterAll(async () => {
-        user.id && userModel.deleteUser(user.id);
+        const connection = db.connect();
+        const sql =`DELETE FROM products_order;\n ALTER SEQUENCE products_order_id_seq RESTART WITH 1;\n
+        DELETE FROM orders;\n ALTER SEQUENCE orders_id_seq RESTART WITH 1;\n
+        DELETE FROM users;\n ALTER SEQUENCE users_id_seq RESTART WITH 1;\n
+        DELETE FROM products;\n ALTER SEQUENCE products_id_seq RESTART WITH 1;`;
+        (await connection).query(sql);
+        (await connection).release();
     })  
     it('should create new order',async () => {
-        /* const connection = db.connect();
-        const sql = `DELETE FROM orders`;
-        (await connection).query(sql);
-        (await connection).release(); */
         const order = await orderModel.createOrder(newOrder);
         expect(order.id).toBeTruthy();
     });
@@ -49,7 +51,7 @@ describe('Orders Model Tests ', ()=>{
     });
 
     it('should get one order',async () => {
-        const order = await orderModel.getOrder(8);
+        const order = await orderModel.getOrder(1);
         expect(order.id).toEqual(1);
     });
 })
