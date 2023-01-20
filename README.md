@@ -32,7 +32,7 @@ v16.19.0
 First, create a `.env` file that contain all the required environment variables:
 
 ```bash
-# .env
+# .env varables
 PORT =3000
 NODE_ENV =dev
 POSTGRES_HOST =127.0.0.1
@@ -69,6 +69,17 @@ Next, you need to run the database migrations:
 npm run migration:up
 ```
 
+# create db for testing 
+```bash
+create database store_dev; 
+```
+
+then run command 
+```bash
+npm run dev
+```
+
+
 ## Running the application
 
 Use the following command to run the application in watch mode:
@@ -87,8 +98,19 @@ Use the following command to run the unit tests:
 ```bash
 npm run test
 ```
+To reset tetsing database run this command
 
+```bash
+npm run test:reset
+```
+if u will run test command several times 
+please reset first then run it 
+```bash
+npm run test:reset
+npm run test
+```
 To Test it You will use the Postman.
+
 
 ## Built With
 

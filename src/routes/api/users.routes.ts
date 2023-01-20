@@ -4,15 +4,15 @@ import * as controller from '../../controller/users.controller';
 
 const routes = Router();
 
-routes.get('/',authValidationHandler,controller.getAllUsers);
+routes.get('/',authValidationHandler ,controller.getAllUsers);
 
 routes.get('/:id',authValidationHandler,controller.getUser);
 
-routes.post('/addUser',authValidationHandler,controller.createUser);
+routes.post('/',authValidationHandler ,controller.createUser);
 
-routes.put('/editUser',authValidationHandler,controller.updateUser);
+routes.put('/',authValidationHandler,controller.updateUser);
 
-routes.delete('/deleteUser/:id',authValidationHandler,controller.deleteUser);
+routes.delete('/:id',authValidationHandler,controller.deleteUser);
 
 routes.post('/authenticate', controller.authenticateUser)
 

@@ -29,6 +29,7 @@ class UserModel {
       connection.release();
       return result.rows[0];
     } catch (error) {
+      console.log('user',user);
       throw new Error(`unable to create this user ${user.user_name}`);
     }
   }

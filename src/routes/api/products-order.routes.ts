@@ -4,8 +4,7 @@ import * as controller from '../../controller/products-order.controller';
 
 const routes = Router();
 
-routes.post('/new',controller.create);
-routes.get('/:order_id',controller.showAll);
-/*routes.get('/:user_id',controller.showOrder); */
+routes.post('/',authValidationHandler,controller.create);
+routes.get('/:order_id',authValidationHandler ,controller.showAll);
 
 export default routes;

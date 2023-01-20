@@ -34,30 +34,8 @@ describe('Products-Order Model Tests ', ()=>{
         "quantity": 9
       }
 
-    
-    beforeAll(async () => {
-
-        /* const connection = db.connect();
-        const sql =`DELETE orders;\n ALTER SEQUENCE orders_id_seq RESTART WITH 1;\n
-        DELETE users;\n ALTER SEQUENCE users_id_seq RESTART WITH 1;\n 
-        DELETE FROM products;\n ALTER SEQUENCE products_id_seq RESTART WITH 1;`;
-        (await connection).query(sql);
-        (await connection).release();
-
-        await userModel.addNewUser(user);
-        await productModel.createProduct(newProduct);
-        await orderModel.createOrder(newOrder); */
-   
-    });
-    afterAll(async () => {
-        const connection = db.connect();
-        const sql =`DELETE FROM products_order;\n ALTER SEQUENCE products_order_id_seq RESTART WITH 1;\n
-        DELETE orders;\n ALTER SEQUENCE orders_id_seq RESTART WITH 1;\n
-        DELETE users;\n ALTER SEQUENCE users_id_seq RESTART WITH 1;\n 
-        DELETE FROM products;\n ALTER SEQUENCE products_id_seq RESTART WITH 1;`;
-        (await connection).query(sql);
-        (await connection).release();
-    })   
+    beforeAll(async () => {});
+    afterAll(async () => {})   
     it('should create new productsorder',async () => {
         await userModel.addNewUser(user);
         await productModel.createProduct(newProduct);

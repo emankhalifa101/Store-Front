@@ -4,10 +4,10 @@ import * as controller from '../../controller/products.controller';
 
 const routes = Router();
 
-routes.post('/add',controller.createProduct);
+routes.post('/',authValidationHandler ,controller.createProduct);
 
-routes.get('/',controller.showAllPRoducts);
+routes.get('/',authValidationHandler ,controller.showAllPRoducts);
 
-routes.get('/:id',authValidationHandler,controller.showProduct);
+routes.get('/:id',authValidationHandler ,authValidationHandler,controller.showProduct);
 
 export default routes;
